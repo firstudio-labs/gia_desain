@@ -15,14 +15,24 @@
                     {{ $profil->alamat_perusahaan }}
                 </li>
             </ul>
+            @if ($profil->facebook_perusahaan || $profil->twitter_perusahaan || $profil->instagram_perusahaan || $profil->linkedin_perusahaan)
             <div class="header-top-right">
                 <div class="social-icon d-flex align-items-center">
-                    <a href="{{ $profil->facebook_perusahaan }}"><i class="fab fa-facebook-f"></i></a>
-                    <a href="{{ $profil->twitter_perusahaan }}"><i class="fab fa-twitter"></i></a>
-                    <a href="{{ $profil->instagram_perusahaan }}"><i class="fab fa-instagram"></i></a>
+                    @if ($profil->facebook_perusahaan)
+                        <a href="{{ $profil->facebook_perusahaan }}"><i class="fab fa-facebook-f"></i></a>
+                    @endif
+                    @if ($profil->twitter_perusahaan)
+                        <a href="{{ $profil->twitter_perusahaan }}"><i class="fab fa-twitter"></i></a>
+                    @endif
+                    @if ($profil->instagram_perusahaan)
+                        <a href="{{ $profil->instagram_perusahaan }}"><i class="fab fa-instagram"></i></a>
+                    @endif
+                    @if ($profil->linkedin_perusahaan)
+                        <a href="{{ $profil->linkedin_perusahaan }}"><i class="fab fa-linkedin-in"></i></a>
+                    @endif
                 </div>
-
             </div>
+            @endif
         </div>
     </div>
 </div>
@@ -47,12 +57,12 @@
                                 <ul>
                                     <li class="has-dropdown active menu-thumb">
                                         <a href="{{ route('landing') }}">
-                                            Home
+                                            Beranda
                                         </a>
                                     </li>
                                     <li class="has-dropdown active d-xl-none">
                                         <a href="{{ route('landing') }}" class="border-top-none">
-                                            Home
+                                            Beranda
                                             <i class="fas fa-angle-down"></i>
                                         </a>
                                     </li>

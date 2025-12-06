@@ -89,23 +89,25 @@ class ProfilPerusahaanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Profil $profil)
+    public function show(Profil $profil_perusahaan)
     {
+        $profil = $profil_perusahaan;
         return view('page_admin.profil_perusahaan.show', compact('profil'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Profil $profil)
+    public function edit(Profil $profil_perusahaan)
     {
+        $profil = $profil_perusahaan;
         return view('page_admin.profil_perusahaan.edit', compact('profil'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Profil $profil)
+    public function update(Request $request, Profil $profil_perusahaan)
     {
         try {
             $request->validate([
@@ -122,21 +124,21 @@ class ProfilPerusahaanController extends Controller
                 'linkedin_perusahaan' => 'nullable|string',
             ]);
 
-            $profil->nama_perusahaan = $request->nama_perusahaan;
-            $profil->no_telp_perusahaan = $request->no_telp_perusahaan;
-            $profil->alamat_perusahaan = $request->alamat_perusahaan;
-            $profil->latitude = $request->latitude;
-            $profil->longitude = $request->longitude;
-            $profil->email_perusahaan = $request->email_perusahaan;
-            $profil->instagram_perusahaan = $request->instagram_perusahaan;
-            $profil->facebook_perusahaan = $request->facebook_perusahaan;
-            $profil->twitter_perusahaan = $request->twitter_perusahaan;
-            $profil->linkedin_perusahaan = $request->linkedin_perusahaan;
+            $profil_perusahaan->nama_perusahaan = $request->nama_perusahaan;
+            $profil_perusahaan->no_telp_perusahaan = $request->no_telp_perusahaan;
+            $profil_perusahaan->alamat_perusahaan = $request->alamat_perusahaan;
+            $profil_perusahaan->latitude = $request->latitude;
+            $profil_perusahaan->longitude = $request->longitude;
+            $profil_perusahaan->email_perusahaan = $request->email_perusahaan;
+            $profil_perusahaan->instagram_perusahaan = $request->instagram_perusahaan;
+            $profil_perusahaan->facebook_perusahaan = $request->facebook_perusahaan;
+            $profil_perusahaan->twitter_perusahaan = $request->twitter_perusahaan;
+            $profil_perusahaan->linkedin_perusahaan = $request->linkedin_perusahaan;
 
             if ($request->hasFile('logo_perusahaan')) {
                 // Hapus logo lama jika ada
-                if ($profil->logo_perusahaan && file_exists(public_path('upload/profil/' . $profil->logo_perusahaan))) {
-                    unlink(public_path('upload/profil/' . $profil->logo_perusahaan));
+                if ($profil_perusahaan->logo_perusahaan && file_exists(public_path('upload/profil/' . $profil_perusahaan->logo_perusahaan))) {
+                    unlink(public_path('upload/profil/' . $profil_perusahaan->logo_perusahaan));
                 }
                 $logo = $request->file('logo_perusahaan');
                 $logoName = time() . '.webp';
@@ -148,10 +150,10 @@ class ProfilPerusahaanController extends Controller
                 $image = $manager->read($logo);
                 $image->toWebp(80);
                 $image->save($path . '/' . $logoName);
-                $profil->logo_perusahaan = $logoName;
+                $profil_perusahaan->logo_perusahaan = $logoName;
             }
 
-            $profil->save();
+            $profil_perusahaan->save();
             Alert::toast('Profil berhasil diubah', 'success')->position('top-end');
             return redirect()->route('profil-perusahaan.index');
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -164,15 +166,15 @@ class ProfilPerusahaanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Profil $profil)
+    public function destroy(Profil $profil_perusahaan)
     {
         try {
             // Hapus gambar jika ada
-            if ($profil->logo_perusahaan && file_exists(public_path('upload/profil/' . $profil->logo_perusahaan))) {
-                unlink(public_path('upload/profil/' . $profil->logo_perusahaan));
+            if ($profil_perusahaan->logo_perusahaan && file_exists(public_path('upload/profil/' . $profil_perusahaan->logo_perusahaan))) {
+                unlink(public_path('upload/profil/' . $profil_perusahaan->logo_perusahaan));
             }
 
-            $profil->delete();
+            $profil_perusahaan->delete();
             Alert::toast('Profil berhasil dihapus', 'success')->position('top-end');
             return redirect()->route('profil-perusahaan.index');
         } catch (\Exception $e) {

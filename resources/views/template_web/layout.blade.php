@@ -160,7 +160,7 @@
     </div>
 
     <!-- Popup Iklan -->
-    @include('template_web.popup_iklan')
+    {{-- @include('template_web.popup_iklan') --}}
 
 	@yield('content')
 

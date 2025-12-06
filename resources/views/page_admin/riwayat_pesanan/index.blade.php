@@ -65,7 +65,7 @@
               </div>
 
               <div class="dt-responsive table-responsive">
-                <table id="simpletable" class="table table-striped table-bordered nowrap">
+                <table id="riwayat-pesanan-table" class="table table-striped table-bordered nowrap">
                   <thead>
                     <tr>
                       <th>No</th>
@@ -80,7 +80,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @forelse($pesanans as $e => $pesanan)
+                    @foreach($pesanans as $e => $pesanan)
                     <tr>
                       <td>{{ ($pesanans->currentPage() - 1) * $pesanans->perPage() + $e + 1 }}</td>
                       <td><strong>{{ $pesanan->order_id }}</strong></td>
@@ -96,25 +96,8 @@
                         </a>
                       </td>
                     </tr>
-                    @empty
-                    <tr>
-                      <td colspan="9" class="text-center">Tidak ada data pesanan</td>
-                    </tr>
-                    @endforelse
+                    @endforeach
                   </tbody>
-                  <tfoot>
-                    <tr>
-                      <th>No</th>
-                      <th>Order ID</th>
-                      <th>Nama Customer</th>
-                      <th>Email</th>
-                      <th>Tanggal Pesanan</th>
-                      <th>Jumlah Item</th>
-                      <th>Subtotal</th>
-                      <th>Total</th>
-                      <th>Aksi</th>
-                    </tr>
-                  </tfoot>
                 </table>
               </div>
 
@@ -134,15 +117,37 @@
 @endsection
 
 @section('script')
-  <script>
-    $(document).ready(function() {
-      $('#simpletable').DataTable({
-        "paging": false,
-        "searching": false,
-        "info": false,
-        "ordering": true,
-        "order": [[4, "desc"]]
-      });
+<script>
+  $(document).ready(function() {
+    // Inisialisasi DataTable dengan ID unik untuk menghindari konflik
+    $('#riwayat-pesanan-table').DataTable({
+      paging: false,
+      searching: false,
+      info: false,
+      ordering: true,
+      order: [[4, 'desc']],
+      autoWidth: false,
+      columns: [
+        { width: "5%" },
+        { width: "12%" },
+        { width: "15%" },
+        { width: "15%" },
+        { width: "15%" },
+        { width: "10%" },
+        { width: "12%" },
+        { width: "12%" },
+        { width: "4%" }
+      ],
+      columnDefs: [
+        { orderable: false, targets: [0, 8] }
+      ],
+      language: {
+        emptyTable: "Tidak ada data pesanan",
+        zeroRecords: "Tidak ada data yang cocok",
+        infoEmpty: "Menampilkan 0 dari 0 data",
+        infoFiltered: "(disaring dari _MAX_ total data)"
+      }
     });
-  </script>
+  });
+</script>
 @endsection

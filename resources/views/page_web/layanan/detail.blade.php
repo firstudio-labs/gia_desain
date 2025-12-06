@@ -32,8 +32,8 @@
                <div class="row g-5">
                    <div class="col-lg-8">
                        @if($manageLayanan->gambar_layanan)
-                       <div class="service-details-image">
-                           <img src="{{ asset('gambar_layanan/gambar/' . $manageLayanan->gambar_layanan) }}" alt="{{ $manageLayanan->judul_layanan }}" class="img-fluid">
+                       <div class="service-details-image" style="max-width: 600px; margin:0 auto;">
+                           <img src="{{ asset('gambar_layanan/gambar/' . $manageLayanan->gambar_layanan) }}" alt="{{ $manageLayanan->judul_layanan }}" class="img-fluid" style="max-width:100%;">
                        </div>
                        @endif
                        <div class="service-details-content">

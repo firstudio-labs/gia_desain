@@ -360,6 +360,9 @@
                             icon: 'success',
                             timer: 1500,
                             showConfirmButton: false
+                        }).then(() => {
+                            // Reload halaman setelah SweetAlert selesai
+                            location.reload();
                         });
                         // Reload cart sidebar
                         if (typeof loadCart === 'function') {

@@ -90,6 +90,6 @@ class LandingController extends Controller
             return $item['produks']->count() > 0;
         });
         
-        return view('page_web.landing.index', compact('profil', 'beranda', 'produkTerbaru', 'manageLayanans', 'ownerWhatsapp', 'produkPerKategori'));
+        return view('page_web.landing.index', compact('profil', 'beranda', 'produkTerbaru', 'manageLayanans', 'ownerWhatsapp', 'produkPerKategori', 'sectionTerbaru'));
     }
 }

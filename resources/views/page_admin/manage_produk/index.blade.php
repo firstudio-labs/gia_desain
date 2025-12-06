@@ -6,7 +6,6 @@
       <style>
         :root{--pri:#4F46E5;--pri-600:#4338CA;--sec:#0EA5E9;--acc:#22C55E;--warn:#F59E0B;--danger:#EF4444;--muted:#6b7280}
         .card{border:0;border-radius:12px}
-        .card-header{border-bottom:0;border-top-left-radius:12px;border-top-right-radius:12px;background:linear-gradient(135deg,var(--pri),var(--sec));color:#fff}
         .btn-primary{background:var(--pri);border-color:var(--pri)}
         .btn-primary:hover{background:var(--pri-600);border-color:var(--pri-600)}
         .btn-warning{background:var(--warn);border-color:var(--warn)}

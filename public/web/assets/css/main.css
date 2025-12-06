@@ -11,10 +11,10 @@ Version: 1.1.0
   --body: #fff;
   --black: #000;
   --white: #fff;
-  --theme: #7000fe;
-  --theme2: #7000fe;
+  --theme: #EE6983;
+  --theme2: #EE6983;
   --header: #09052F;
-  --base: #7000fe;
+  --base: #EE6983;
   --text: #767676;
   --text2: #8A8C94;
   --border: #EEEFF4;
@@ -22,7 +22,7 @@ Version: 1.1.0
   --button2: #030734;
   --ratting: #F09815;
   --bg: #f3f5ff;
-  --color-gradient-1: linear-gradient(90.07deg, #FF4E8D 32.43%, #AE34E8 58.79%, #7000fe 105.32%);
+  --color-gradient-1: linear-gradient(90.07deg, #FF4E8D 32.43%, #FF4E8D 60.43%, #EE6983 105.32%);
   ---box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
@@ -2845,7 +2845,7 @@ input.main-search-input::placeholder {
 .hero-4 .hero-content h1 {
   font-weight: 700;
   text-transform: capitalize;
-  background: linear-gradient(90.07deg, #FF4E8D 32.43%, #AE34E8 58.79%, #7000fe 105.32%);
+  background: linear-gradient(90.07deg, #FF4E8D 32.43%, #AE34E8 58.79%, #EE6983 105.32%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -5639,7 +5639,7 @@ input.main-search-input::placeholder {
   border-radius: 15px;
 }
 .service-wrapper .service-image::before {
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 19.36%, rgba(112, 0, 254, 0.55) 71.26%, #7000fe 100%);
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 19.36%, rgba(112, 0, 254, 0.55) 71.26%, #EE6983 100%);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
