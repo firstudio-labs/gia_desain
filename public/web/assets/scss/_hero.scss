@@ -2,7 +2,7 @@
    position: relative;
    z-index: 9;
    overflow: hidden;
-   padding: 120px 0 120px;
+   padding: 180px 0 180px;
 
     .swiper-dot-2 {
         position: absolute;
@@ -18,7 +18,7 @@
    &::before {
         @include before;
         z-index: -1;
-        background: linear-gradient(90deg, rgb(73, 81, 254) 24%, rgb(73, 81, 254) 38%, rgb(148, 69, 211) 62%, rgb(223, 57, 167) 100%);
+        background: linear-gradient(90deg, #FF4E8D 0%, #FF69B4 25%, #FF4E8D 50%, #FF69B4 70%, #9370DB 85%, #8B00FF 100%);
         opacity: .4;
    }
 

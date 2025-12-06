@@ -108,7 +108,7 @@
         <div class="container">
             <div class="contact-form-items">
                 <div class="title text-center">
-                    <h2 class="split-text right">Mari Berhubungan</h2>
+                    <h2 class="split-text right">Hubungi Kami</h2>
                     <p>Alamat email Anda tidak akan dipublikasikan. Field yang wajib diisi ditandai dengan *</p>
                 </div>
                 <form action="{{ route('kontak.store') }}" method="POST" id="kontakForm">

@@ -78,7 +78,7 @@
                                     @endforeach
                                 </ul>
                             </div>
-                            <div class="contact-bg text-center bg-cover" style="background-image: url('https://i.pinimg.com/originals/ac/5e/66/ac5e66a718a3a5254a4f7575815c168c.png');">
+                            <div class="contact-bg text-center bg-cover" style="background-image: url('{{ asset('web') }}/assets/img/contact-bg.png');">
                                 <div class="mb-3">
                                     <i class="fab fa-whatsapp" style="color:#25D366; font-size: 3rem; background: white; border-radius: 50%; padding: 18px 18px;"></i>
                                 </div>
