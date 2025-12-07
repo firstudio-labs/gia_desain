@@ -78,7 +78,7 @@
                     <div class="row g-4 align-items-center justify-content-between">
                         <div class="col-lg-6">
                             <div class="hero-content">
-                            <p>
+                                <p>
                                     {{ $beranda->keterangan }}
                                 </p>
                                 <h1>
@@ -102,12 +102,12 @@
                     <div class="row g-4 align-items-center justify-content-between">
                         <div class="col-lg-6">
                             <div class="hero-content">
-                                <h1>
-                                    {{ $beranda->judul_sekunder ?? $beranda->slogan }}
-                                </h1>
                                 <p>
                                     {{ $beranda->keterangan }}
                                 </p>
+                                <h1>
+                                    {{ $beranda->judul_sekunder ?? $beranda->slogan }}
+                                </h1>
                             </div>
                             <div class="hero-button">
                                 <a href="{{ route('shop') }}" class="theme-btn">Belanja Sekarang</a>
@@ -117,30 +117,6 @@
                             <div class="hero-image">
                                 <div class="hero-img">
                                     <img src="{{ asset('upload/beranda/' . $beranda->gambar_sekunder) }}" alt="img">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="row g-4 align-items-center justify-content-between">
-                        <div class="col-lg-6">
-                            <div class="hero-content">
-                                <h1>
-                                    {{ $beranda->judul_utama ?? $beranda->slogan }}
-                                </h1>
-                                <p>
-                                    {{ $beranda->keterangan }}
-                                </p>
-                            </div>
-                            <div class="hero-button">
-                                <a href="{{ route('shop') }}" class="theme-btn">Belanja Sekarang</a>
-                            </div>
-                        </div>
-                        <div class="col-lg-5">
-                            <div class="hero-image">
-                                <div class="hero-img">
-                                    <img src="{{ asset('upload/beranda/' . $beranda->gambar_utama) }}" alt="img">
                                 </div>
                             </div>
                         </div>
