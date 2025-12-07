@@ -55,8 +55,19 @@ class ManageLayananController extends Controller
 
             $gambar = null;
             if ($request->hasFile('gambar_layanan')) {
-                $gambar = time() . '_' . $request->file('gambar_layanan')->getClientOriginalName();
-                $request->file('gambar_layanan')->move(public_path('gambar_layanan/gambar'), $gambar);
+                $path = public_path('gambar_layanan/gambar');
+                if (!file_exists($path)) {
+                    mkdir($path, 0755, true);
+                }
+                
+                $gambar = time() . '.webp';
+                $file = $request->file('gambar_layanan');
+                
+                // Kompresi dan konversi ke WebP
+                $manager = new ImageManager(new Driver());
+                $image = $manager->read($file);
+                $image->toWebp(80); // Kualitas 80%
+                $image->save($path . '/' . $gambar);
             }
             $faqData = [];
             if ($request->has('faq') && is_array($request->faq)) {
@@ -132,9 +143,22 @@ class ManageLayananController extends Controller
                 if ($manageLayanan->gambar_layanan && file_exists(public_path('gambar_layanan/gambar/' . $manageLayanan->gambar_layanan))) {
                     unlink(public_path('gambar_layanan/gambar/' . $manageLayanan->gambar_layanan));
                 }
-                // Upload gambar baru
-                $gambar = time() . '_' . $request->file('gambar_layanan')->getClientOriginalName();
-                $request->file('gambar_layanan')->move(public_path('gambar_layanan/gambar'), $gambar);
+                
+                // Upload gambar baru dengan kompresi dan konversi ke WebP
+                $path = public_path('gambar_layanan/gambar');
+                if (!file_exists($path)) {
+                    mkdir($path, 0755, true);
+                }
+                
+                $gambar = time() . '.webp';
+                $file = $request->file('gambar_layanan');
+                
+                // Kompresi dan konversi ke WebP
+                $manager = new ImageManager(new Driver());
+                $image = $manager->read($file);
+                $image->toWebp(80); // Kualitas 80%
+                $image->save($path . '/' . $gambar);
+                
                 $updateData['gambar_layanan'] = $gambar;
             }
 

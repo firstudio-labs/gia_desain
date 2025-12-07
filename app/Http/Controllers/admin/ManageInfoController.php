@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class ManageInfoController extends Controller
 {
@@ -46,10 +48,14 @@ class ManageInfoController extends Controller
             if (!File::exists($dir)) {
                 File::makeDirectory($dir, 0755, true);
             }
-            $extension = $request->file('gambar')->getClientOriginalExtension();
             $safeBase = Str::slug(pathinfo($request->file('gambar')->getClientOriginalName(), PATHINFO_FILENAME));
-            $filename = time() . '_' . $safeBase . '.' . $extension;
-            $request->file('gambar')->move($dir, $filename);
+            $filename = time() . '_' . $safeBase . '.webp';
+            
+            // Kompresi dan konversi ke WebP
+            $manager = new ImageManager(new Driver());
+            $image = $manager->read($request->file('gambar'));
+            $image->toWebp(80); // Kualitas 80%
+            $image->save($dir . '/' . $filename);
         }
 
         ManageInfo::create([
@@ -109,10 +115,15 @@ class ManageInfoController extends Controller
                     File::delete($oldPath);
                 }
             }
-            $extension = $request->file('gambar')->getClientOriginalExtension();
             $safeBase = Str::slug(pathinfo($request->file('gambar')->getClientOriginalName(), PATHINFO_FILENAME));
-            $filename = time() . '_' . $safeBase . '.' . $extension;
-            $request->file('gambar')->move($dir, $filename);
+            $filename = time() . '_' . $safeBase . '.webp';
+            
+            // Kompresi dan konversi ke WebP
+            $manager = new ImageManager(new Driver());
+            $image = $manager->read($request->file('gambar'));
+            $image->toWebp(80); // Kualitas 80%
+            $image->save($dir . '/' . $filename);
+            
             $data['gambar'] = $filename;
         }
 

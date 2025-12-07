@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class ManageProdukController extends Controller
 {
@@ -57,12 +59,19 @@ class ManageProdukController extends Controller
             $gambarPaths = [];
 
             if ($request->hasFile('gambar_produk')) {
+                $targetDir = public_path('produk/gambar');
+                if (!is_dir($targetDir)) { @mkdir($targetDir, 0755, true); }
+                
+                $manager = new ImageManager(new Driver());
                 foreach ($request->file('gambar_produk') as $file) {
                     if (!$file) { continue; }
-                    $filename = time() . '_' . Str::random(8) . '.' . $file->getClientOriginalExtension();
-                    $targetDir = public_path('produk/gambar');
-                    if (!is_dir($targetDir)) { @mkdir($targetDir, 0755, true); }
-                    $file->move($targetDir, $filename);
+                    $filename = time() . '_' . Str::random(8) . '.webp';
+                    
+                    // Kompresi dan konversi ke WebP
+                    $image = $manager->read($file);
+                    $image->toWebp(80); // Kualitas 80%
+                    $image->save($targetDir . '/' . $filename);
+                    
                     $gambarPaths[] = $filename;
                 }
             }
@@ -148,12 +157,19 @@ class ManageProdukController extends Controller
 
             // Tambah gambar baru
             if ($request->hasFile('gambar_produk')) {
+                $targetDir = public_path('produk/gambar');
+                if (!is_dir($targetDir)) { @mkdir($targetDir, 0755, true); }
+                
+                $manager = new ImageManager(new Driver());
                 foreach ($request->file('gambar_produk') as $file) {
                     if (!$file) { continue; }
-                    $filename = time() . '_' . Str::random(8) . '.' . $file->getClientOriginalExtension();
-                    $targetDir = public_path('produk/gambar');
-                    if (!is_dir($targetDir)) { @mkdir($targetDir, 0755, true); }
-                    $file->move($targetDir, $filename);
+                    $filename = time() . '_' . Str::random(8) . '.webp';
+                    
+                    // Kompresi dan konversi ke WebP
+                    $image = $manager->read($file);
+                    $image->toWebp(80); // Kualitas 80%
+                    $image->save($targetDir . '/' . $filename);
+                    
                     $gambarExisting[] = $filename;
                 }
             }

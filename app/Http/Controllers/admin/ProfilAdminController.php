@@ -9,6 +9,8 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class ProfilAdminController extends Controller
 {
@@ -40,16 +42,26 @@ class ProfilAdminController extends Controller
 
         $data = $request->except(['password', 'foto_profile']);
 
-        // Proses upload foto_profile ke folder public
+        // Proses upload foto_profile ke folder public dengan kompresi dan konversi ke WebP
         if ($request->hasFile('foto_profile')) {
+            $path = public_path('upload/foto_profile');
+            if (!file_exists($path)) {
+                mkdir($path, 0755, true);
+            }
+            
+            $filename = 'profile_' . Str::random(10) . '.webp';
             $file = $request->file('foto_profile');
-            $filename = 'profile_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('upload/foto_profile'), $filename);
 
             // Hapus foto lama jika ada dan bukan default
             if ($user->foto_profile && file_exists(public_path('upload/foto_profile/' . $user->foto_profile))) {
                 @unlink(public_path('upload/foto_profile/' . $user->foto_profile));
             }
+
+            // Kompresi dan konversi ke WebP
+            $manager = new ImageManager(new Driver());
+            $image = $manager->read($file);
+            $image->toWebp(80); // Kualitas 80%
+            $image->save($path . '/' . $filename);
 
             $data['foto_profile'] = $filename;
         }
