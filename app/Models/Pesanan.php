@@ -15,6 +15,7 @@ class Pesanan extends Model
         'quantity',
         'sub_total',
         'total',
+        'status',
     ];
     protected $casts = [
         'order_id' => 'string',

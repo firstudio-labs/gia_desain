@@ -132,6 +132,21 @@
                                 </div>
                             </li>
                             @endif
+                            <li>
+                                <div class="">
+                                        <img src="https://assets.zonalogo.com/finance/bank-central-asia/bank-central-asia-256.webp" alt="Logo Bank" style="max-width: 40px; height: auto;">
+
+                                </div>
+                                <div class="content">
+                                    <span>Rekening Bank</span>
+                                    <div class="d-flex align-items-center gap-2 mt-2">
+                                        <div>
+                                            <h3 class="mb-0" style="font-size: 14px; font-weight: 600;">2521318025</h3>
+                                            <small style="font-size: 12px; opacity: 0.8;">Imam Rizki</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
                           
                         </ul>
                     </div>

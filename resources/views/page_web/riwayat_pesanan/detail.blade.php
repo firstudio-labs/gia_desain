@@ -113,6 +113,20 @@
                                             <label class="text-muted small">Total Item</label>
                                             <p class="mb-0"><span class="badge bg-primary">{{ $pesanan->quantity }} item</span></p>
                                         </div>
+                                        <div class="mb-3">
+                                            <label class="text-muted small">Status</label>
+                                            <p class="mb-0">
+                                                @if($pesanan->status == 'pending')
+                                                    <span class="badge bg-warning">Pending</span>
+                                                @elseif($pesanan->status == 'proses')
+                                                    <span class="badge bg-info">Proses</span>
+                                                @elseif($pesanan->status == 'selesai')
+                                                    <span class="badge bg-success">Selesai</span>
+                                                @else
+                                                    <span class="badge bg-secondary">{{ $pesanan->status }}</span>
+                                                @endif
+                                            </p>
+                                        </div>
                                         <hr>
                                         <div class="mb-2">
                                             <div class="d-flex justify-content-between">
@@ -131,9 +145,40 @@
 
                                 <div class="card shadow-sm wow fadeInUp" data-wow-delay=".7s">
                                     <div class="card-body text-center">
-                                        <a href="{{ route('riwayat-pesanan.invoice', $pesanan->id) }}" target="_blank" class="btn btn-success w-100 mb-2">
-                                            <i class="far fa-file-invoice me-2"></i>Cetak Invoice
-                                        </a>
+                                        @if($pesanan->status == 'selesai')
+                                            <a href="{{ route('riwayat-pesanan.invoice', $pesanan->id) }}" target="_blank" class="btn btn-success w-100 mb-2">
+                                                <i class="far fa-file-invoice me-2"></i>Cetak Invoice
+                                            </a>
+                                        @else
+                                            <button type="button" class="btn btn-success w-100 mb-2" disabled title="Invoice hanya dapat dicetak jika status pesanan sudah selesai">
+                                                <i class="far fa-file-invoice me-2"></i>Cetak Invoice
+                                            </button>
+                                        @endif
+
+                                        @if($pesanan->status == 'proses')
+                                            <form action="{{ route('riwayat-pesanan.update-status', $pesanan->id) }}" method="POST" class="mb-2">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit" class="btn btn-primary w-100" onclick="return confirm('Apakah Anda yakin ingin mengubah status pesanan menjadi selesai?')">
+                                                    <i class="far fa-check-circle me-2"></i>Ubah Status ke Selesai
+                                                </button>
+                                            </form>
+                                        @endif
+
+                                        @if (session('success'))
+                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                {{ session('success') }}
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>
+                                        @endif
+
+                                        @if (session('error'))
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                {{ session('error') }}
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>
+                                        @endif
+
                                         <a href="{{ route('riwayat-pesanan.index') }}" class="btn btn-outline-secondary w-100 mb-2">
                                             <i class="far fa-arrow-left me-2"></i>Kembali ke Riwayat
                                         </a>

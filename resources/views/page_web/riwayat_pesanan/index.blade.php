@@ -46,6 +46,7 @@
                                         <tr>
                                             <th>Order ID</th>
                                             <th>Tanggal Pesanan</th>
+                                            <th>Status</th>
                                             <th>Jumlah Item</th>
                                             <th>Total</th>
                                             <th>Aksi</th>
@@ -59,6 +60,17 @@
                                                 </td>
                                                 <td>
                                                     {{ \Carbon\Carbon::parse($pesanan->created_at)->format('d M Y, H:i') }}
+                                                </td>
+                                                <td>
+                                                    @if($pesanan->status == 'pending')
+                                                        <span class="badge bg-warning">Pending</span>
+                                                    @elseif($pesanan->status == 'proses')
+                                                        <span class="badge bg-info">Proses</span>
+                                                    @elseif($pesanan->status == 'selesai')
+                                                        <span class="badge bg-success">Selesai</span>
+                                                    @else
+                                                        <span class="badge bg-secondary">{{ $pesanan->status }}</span>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <span class="badge bg-primary">{{ $pesanan->quantity }} item</span>

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('quantity'); // Jumlah
             $table->decimal('sub_total', 15, 2); // Sub Total
             $table->decimal('total', 15, 2); // Total
+            $table->string('status')->default('pending'); // Status
             $table->timestamps();
         });
     }

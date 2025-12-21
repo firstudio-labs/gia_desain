@@ -34,5 +34,23 @@ class DaftarRiwayatPesananController extends Controller
         
         return view('page_admin.riwayat_pesanan.show', compact('pesanan'));
     }
+
+    /**
+     * Update status pesanan to 'proses'
+     */
+    public function updateStatus(Request $request, $id)
+    {
+        $pesanan = Pesanan::findOrFail($id);
+        
+        $request->validate([
+            'status' => 'required|in:pending,proses,selesai'
+        ]);
+
+        $pesanan->update([
+            'status' => $request->status
+        ]);
+
+        return redirect()->back()->with('success', 'Status pesanan berhasil diubah menjadi ' . ucfirst($request->status));
+    }
 }
 

@@ -117,6 +117,7 @@ class PesananController extends Controller
             'quantity' => $totalQuantity,
             'sub_total' => $subtotal,
             'total' => $subtotal,
+            'status' => 'pending',
         ]);
 
         // Hapus keranjang setelah checkout
