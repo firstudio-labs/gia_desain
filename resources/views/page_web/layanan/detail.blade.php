@@ -145,3 +145,28 @@
         </div>
     </section>
 @endsection
+
+@section('style')
+<style>
+    /* Force all images to 1:1 aspect ratio */
+    .service-details-image img,
+    .shop-thumb img,
+    .shop-details-image .nav-link img,
+    .cta-shape img,
+    .product-thumb img {
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .service-details-image,
+    .shop-thumb,
+    .shop-details-image .nav-link,
+    .cta-shape,
+    .product-thumb {
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+    }
+</style>
+@endsection

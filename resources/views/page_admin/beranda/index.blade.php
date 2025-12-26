@@ -31,7 +31,9 @@
           <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">Tabel Data Beranda</h5>
+                @if($berandas->count() == 0)
                 <a href="{{ route('beranda.create') }}" class="btn btn-primary">Tambah Data Beranda</a>
+                @endif
             </div>
             <div class="card-body">
               @if (session('success'))

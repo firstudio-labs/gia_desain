@@ -11,6 +11,23 @@
         <button id="closeButton" class="x-mark-icon"><i class="fas fa-times"></i></button>
     </div>
 
+<style>
+    /* Force all cart images to 1:1 aspect ratio */
+    .cartmini__thumb img,
+    .cartmini__thumb a {
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+    
+    .cartmini__thumb {
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+    }
+</style>
+
 <script>
     function loadCart() {
         fetch('{{ route("keranjang.get") }}', {
@@ -32,7 +49,7 @@
                         <div class="cartmini__widget-item" data-cart-id="${item.id}">
                             <div class="cartmini__thumb">
                                 <a href="{{ url('/shop') }}/${item.slug}">
-                                    <img src="${item.gambar}" alt="${item.judul}">
+                                    <img src="${item.gambar}" alt="${item.judul}" style="aspect-ratio: 1/1; object-fit: cover; width: 100%; height: 100%;">
                                 </a>
                             </div>
                             <div class="cartmini__content">

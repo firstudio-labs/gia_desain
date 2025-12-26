@@ -62,17 +62,11 @@
                 <span data-text-preloader=" " class="letters-loading">
                      
                 </span>
-                <span data-text-preloader="D" class="letters-loading">
-                    D
+                <span data-text-preloader="P" class="letters-loading">
+                    P
                 </span>
-                <span data-text-preloader="E" class="letters-loading">
-                    E
-                </span>
-                <span data-text-preloader="S" class="letters-loading">
-                    S
-                </span>
-                <span data-text-preloader="A" class="letters-loading">
-                    A
+                <span data-text-preloader="R" class="letters-loading">
+                    R
                 </span>
                 <span data-text-preloader="I" class="letters-loading">
                     I
@@ -80,6 +74,10 @@
                 <span data-text-preloader="N" class="letters-loading">
                     N
                 </span>
+                <span data-text-preloader="T" class="letters-loading">
+                    T
+                </span>
+               
             </div>
             <p class="text-center">Loading</p>
         </div>
@@ -128,6 +126,36 @@
                                 <i class="fas fa-times"></i>
                             </button>
                         </div>
+                    </div>
+                  
+                    <!-- Mobile Search Form -->
+                    <div class="mobile-search-form">
+                        <h5 class="mobile-search-title">Cari Produk</h5>
+                        <form action="{{ route('shop') }}" method="GET">
+                            <div class="mb-3">
+                                <input type="text" 
+                                       name="search" 
+                                       class="form-control" 
+                                       placeholder="Cari produk..." 
+                                       value="{{ request('search') }}">
+                            </div>
+                            <div class="mb-3">
+                                <select name="kategori" class="form-select mobile-kategori-select">
+                                    <option value="">Semua Kategori</option>
+                                    @php
+                                        $kategoris = \App\Models\ManageKategori::orderBy('nama_kategori')->get();
+                                    @endphp
+                                    @foreach($kategoris as $kategori)
+                                        <option value="{{ $kategori->id }}" {{ request('kategori') == $kategori->id ? 'selected' : '' }}>
+                                            {{ $kategori->nama_kategori }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-search me-2"></i>Cari Produk
+                            </button>
+                        </form>
                     </div>
                   
                     <div class="mobile-menu fix mb-3"></div>

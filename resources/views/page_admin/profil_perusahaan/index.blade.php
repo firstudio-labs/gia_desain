@@ -31,7 +31,9 @@
           <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">Tabel Data Profil</h5>
-                <a href="{{ route('profil-perusahaan.create') }}" class="btn btn-primary @if($profils->count() > 0) disabled @endif" @if($profils->count() > 0) aria-disabled="true" tabindex="-1" @endif>Tambah Data Profil</a>
+                @if($profils->count() == 0)
+                <a href="{{ route('profil-perusahaan.create') }}" class="btn btn-primary">Tambah Data Profil</a>
+                @endif
             </div>
             <div class="card-body">
               @if (session('success'))

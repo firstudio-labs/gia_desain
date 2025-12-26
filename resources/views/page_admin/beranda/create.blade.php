@@ -71,6 +71,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="form-label">Gambar Utama</label>
+                      <small class="text-danger">*Disarankan gambar dengan ratio 16:9</small>
                       <input type="file" name="gambar_utama" class="form-control @error('gambar_utama') is-invalid @enderror" accept="image/*">
                       <small class="text-muted">Format: JPG, JPEG, PNG, GIF, SVG. Maksimal 2MB</small>
                       @error('gambar_utama')
@@ -81,6 +82,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="form-label">Gambar Sekunder</label>
+                      <small class="text-danger">*Disarankan gambar dengan ratio 1:1</small>
                       <input type="file" name="gambar_sekunder" class="form-control @error('gambar_sekunder') is-invalid @enderror" accept="image/*">
                       <small class="text-muted">Format: JPG, JPEG, PNG, GIF, SVG. Maksimal 2MB</small>
                       @error('gambar_sekunder')

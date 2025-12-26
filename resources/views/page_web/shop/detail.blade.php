@@ -307,6 +307,32 @@
 
 @endsection
 
+@section('style')
+<style>
+    /* Force all product detail images to 1:1 aspect ratio */
+    .shop-thumb img,
+    .shop-details-image .nav-link img,
+    .product-thumb img {
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .shop-thumb,
+    .shop-details-image .nav-link,
+    .product-thumb {
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+    }
+    
+    /* Thumbnail navigation */
+    .shop-details-image .nav-link {
+        display: block;
+    }
+</style>
+@endsection
+
 @section('script')
 <script>
     // Quantity Button Handler

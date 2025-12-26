@@ -22,6 +22,7 @@ use App\Http\Controllers\admin\{
     ManageArtikelController,
     OwnerWhatsappController,
     DaftarRiwayatPesananController,
+    DaftarUserController,
     ApiWhatsappController,
 };
 use App\Http\Controllers\auth\{
@@ -103,6 +104,8 @@ Route::group(['middleware' => ['role:superadmin']], function () {
     Route::get('daftar-riwayat-pesanan', [DaftarRiwayatPesananController::class, 'index'])->name('daftar-riwayat-pesanan.index');
     Route::get('daftar-riwayat-pesanan/{id}', [DaftarRiwayatPesananController::class, 'show'])->name('daftar-riwayat-pesanan.show');
     Route::put('daftar-riwayat-pesanan/{id}/update-status', [DaftarRiwayatPesananController::class, 'updateStatus'])->name('daftar-riwayat-pesanan.update-status');
+    Route::get('daftar-user', [DaftarUserController::class, 'index'])->name('daftar-user.index');
+    Route::get('daftar-user/{id}', [DaftarUserController::class, 'show'])->name('daftar-user.show');
 });
 
 

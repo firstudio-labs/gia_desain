@@ -36,7 +36,7 @@ class ManageProdukController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'judul' => 'required|string|max:255',
             'kategori_id' => 'required|exists:manage_kategoris,id',
             'sub_kategori_id' => 'required|exists:manage_sub_kategoris,id',
@@ -50,6 +50,32 @@ class ManageProdukController extends Controller
             'warna' => 'nullable|string|max:255',
             'gambar_produk' => 'nullable|array',
             'gambar_produk.*' => 'file|mimes:jpg,jpeg,png,gif,webp,svg|max:3072',
+        ], [
+            'judul.required' => 'Judul produk wajib diisi.',
+            'judul.max' => 'Judul produk maksimal 255 karakter.',
+            'kategori_id.required' => 'Kategori wajib dipilih.',
+            'kategori_id.exists' => 'Kategori yang dipilih tidak valid.',
+            'sub_kategori_id.required' => 'Sub kategori wajib dipilih.',
+            'sub_kategori_id.exists' => 'Sub kategori yang dipilih tidak valid.',
+            'harga.required' => 'Harga wajib diisi.',
+            'harga.numeric' => 'Harga harus berupa angka.',
+            'harga.min' => 'Harga tidak boleh negatif.',
+            'diskon.integer' => 'Diskon harus berupa angka bulat.',
+            'diskon.min' => 'Diskon tidak boleh negatif.',
+            'diskon.max' => 'Diskon maksimal 100%.',
+            'sku.required' => 'SKU wajib diisi.',
+            'sku.max' => 'SKU maksimal 255 karakter.',
+            'deskripsi.required' => 'Deskripsi wajib diisi.',
+            'status.required' => 'Status wajib dipilih.',
+            'status.in' => 'Status yang dipilih tidak valid.',
+            'berat.numeric' => 'Berat harus berupa angka.',
+            'berat.min' => 'Berat tidak boleh negatif.',
+            'ukuran.max' => 'Ukuran maksimal 255 karakter.',
+            'warna.max' => 'Warna maksimal 255 karakter.',
+            'gambar_produk.array' => 'Gambar produk harus berupa array.',
+            'gambar_produk.*.file' => 'File yang diupload harus berupa file.',
+            'gambar_produk.*.mimes' => 'Format gambar harus jpg, jpeg, png, gif, webp, atau svg.',
+            'gambar_produk.*.max' => 'Ukuran gambar maksimal 3MB.',
         ]);
 
         try {
@@ -69,18 +95,18 @@ class ManageProdukController extends Controller
 
             ManageProduk::create([
                 'slug' => $slug,
-                'judul' => $request->judul,
-                'kategori_id' => $request->kategori_id,
-                'sub_kategori_id' => $request->sub_kategori_id,
+                'judul' => $validated['judul'],
+                'kategori_id' => $validated['kategori_id'],
+                'sub_kategori_id' => $validated['sub_kategori_id'],
                 'gambar_produk' => !empty($gambarPaths) ? $gambarPaths : null,
-                'harga' => $request->harga,
-                'diskon' => $request->diskon,
-                'sku' => $request->sku,
-                'deskripsi' => $request->deskripsi,
-                'status' => $request->status,
-                'berat' => $request->berat,
-                'ukuran' => $request->ukuran,
-                'warna' => $request->warna,
+                'harga' => $validated['harga'],
+                'diskon' => $validated['diskon'] ?? null,
+                'sku' => $validated['sku'],
+                'deskripsi' => $validated['deskripsi'],
+                'status' => $validated['status'],
+                'berat' => $validated['berat'] ?? null,
+                'ukuran' => $validated['ukuran'] ?? null,
+                'warna' => $validated['warna'] ?? null,
             ]);
 
             Alert::toast('Produk berhasil disimpan', 'success')->position('top-end');
@@ -107,7 +133,9 @@ class ManageProdukController extends Controller
     public function edit(ManageProduk $manageProduk)
     {
         $kategoris = ManageKategori::orderBy('nama_kategori')->get();
-        $subKategoris = ManageSubKategori::where('kategori_id', $manageProduk->kategori_id)->orderBy('first_nama_sub_kategori')->get();
+        // Gunakan old kategori_id jika ada (saat error), jika tidak gunakan kategori_id dari database
+        $kategoriId = old('kategori_id', $manageProduk->kategori_id);
+        $subKategoris = ManageSubKategori::where('kategori_id', $kategoriId)->orderBy('first_nama_sub_kategori')->get();
         return view('page_admin.manage_produk.edit', compact('manageProduk','kategoris','subKategoris'));
     }
 
@@ -116,7 +144,7 @@ class ManageProdukController extends Controller
      */
     public function update(Request $request, ManageProduk $manageProduk)
     {
-        $request->validate([
+        $validated = $request->validate([
             'judul' => 'required|string|max:255',
             'kategori_id' => 'required|exists:manage_kategoris,id',
             'sub_kategori_id' => 'required|exists:manage_sub_kategoris,id',
@@ -132,6 +160,32 @@ class ManageProdukController extends Controller
             'gambar_produk.*' => 'file|mimes:jpg,jpeg,png,gif,webp,svg|max:3072',
             'hapus_gambar' => 'nullable|array',
             'hapus_gambar.*' => 'string',
+        ], [
+            'judul.required' => 'Judul produk wajib diisi.',
+            'judul.max' => 'Judul produk maksimal 255 karakter.',
+            'kategori_id.required' => 'Kategori wajib dipilih.',
+            'kategori_id.exists' => 'Kategori yang dipilih tidak valid.',
+            'sub_kategori_id.required' => 'Sub kategori wajib dipilih.',
+            'sub_kategori_id.exists' => 'Sub kategori yang dipilih tidak valid.',
+            'harga.required' => 'Harga wajib diisi.',
+            'harga.numeric' => 'Harga harus berupa angka.',
+            'harga.min' => 'Harga tidak boleh negatif.',
+            'diskon.integer' => 'Diskon harus berupa angka bulat.',
+            'diskon.min' => 'Diskon tidak boleh negatif.',
+            'diskon.max' => 'Diskon maksimal 100%.',
+            'sku.required' => 'SKU wajib diisi.',
+            'sku.max' => 'SKU maksimal 255 karakter.',
+            'deskripsi.required' => 'Deskripsi wajib diisi.',
+            'status.required' => 'Status wajib dipilih.',
+            'status.in' => 'Status yang dipilih tidak valid.',
+            'berat.numeric' => 'Berat harus berupa angka.',
+            'berat.min' => 'Berat tidak boleh negatif.',
+            'ukuran.max' => 'Ukuran maksimal 255 karakter.',
+            'warna.max' => 'Warna maksimal 255 karakter.',
+            'gambar_produk.array' => 'Gambar produk harus berupa array.',
+            'gambar_produk.*.file' => 'File yang diupload harus berupa file.',
+            'gambar_produk.*.mimes' => 'Format gambar harus jpg, jpeg, png, gif, webp, atau svg.',
+            'gambar_produk.*.max' => 'Ukuran gambar maksimal 3MB.',
         ]);
 
         try {
@@ -159,18 +213,18 @@ class ManageProdukController extends Controller
             }
 
             $manageProduk->update([
-                'judul' => $request->judul,
-                'kategori_id' => $request->kategori_id,
-                'sub_kategori_id' => $request->sub_kategori_id,
+                'judul' => $validated['judul'],
+                'kategori_id' => $validated['kategori_id'],
+                'sub_kategori_id' => $validated['sub_kategori_id'],
                 'gambar_produk' => !empty($gambarExisting) ? array_values($gambarExisting) : null,
-                'harga' => $request->harga,
-                'diskon' => $request->diskon,
-                'sku' => $request->sku,
-                'deskripsi' => $request->deskripsi,
-                'status' => $request->status,
-                'berat' => $request->berat,
-                'ukuran' => $request->ukuran,
-                'warna' => $request->warna,
+                'harga' => $validated['harga'],
+                'diskon' => $validated['diskon'] ?? null,
+                'sku' => $validated['sku'],
+                'deskripsi' => $validated['deskripsi'],
+                'status' => $validated['status'],
+                'berat' => $validated['berat'] ?? null,
+                'ukuran' => $validated['ukuran'] ?? null,
+                'warna' => $validated['warna'] ?? null,
             ]);
 
             Alert::toast('Produk berhasil diperbarui', 'success')->position('top-end');

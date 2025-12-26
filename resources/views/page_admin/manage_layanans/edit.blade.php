@@ -63,6 +63,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="form-label">Gambar Layanan</label>
+                      <small class="text-danger">*Disarankan gambar dengan ratio 1:1</small>
                       @if($manageLayanan->gambar_layanan)
                         <div class="mb-2">
                           <label class="form-label">Gambar Saat Ini:</label>
@@ -72,7 +73,7 @@
                         </div>
                       @endif
                       <input type="file" name="gambar_layanan" class="form-control @error('gambar_layanan') is-invalid @enderror" accept="image/jpeg,image/png,image/jpg,image/webp" onchange="previewImage(this, 'previewGambar')">
-                      <small class="text-muted">Format: JPEG, PNG, JPG, WEBP (Max: 2MB). Kosongkan jika tidak ingin mengubah gambar.</small>
+                      <small class="text-muted">Format: JPG, JPEG, PNG, GIF, SVG. Maksimal 2MB</small>
                       @error('gambar_layanan')
                         <div class="invalid-feedback">{{ $message }}</div>
                       @enderror

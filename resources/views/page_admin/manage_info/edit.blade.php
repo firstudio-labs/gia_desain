@@ -63,12 +63,14 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="form-label">Gambar</label>
+                      <small class="text-danger">*Disarankan gambar dengan ratio 1:1</small>
                       @if($manageInfo->gambar)
                         <div class="mb-2">
                           <img src="{{ asset('info/gambar/'.$manageInfo->gambar) }}" alt="gambar" style="height:80px;border-radius:6px">
                         </div>
                       @endif
                       <input type="file" name="gambar" accept="image/*" class="form-control @error('gambar') is-invalid @enderror">
+                      <small class="text-muted">Format: JPG, JPEG, PNG, GIF, SVG. Maksimal 2MB</small>
                       @error('gambar')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                   </div>

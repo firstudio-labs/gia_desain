@@ -228,6 +228,16 @@
 
 @endsection
 
+@section('style')
+<style>
+    /* Force profile image to 1:1 aspect ratio */
+    .position-relative.d-inline-block img {
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+    }
+</style>
+@endsection
+
 @section('script')
 <script>
     function previewImage(input) {

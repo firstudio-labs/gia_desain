@@ -40,7 +40,9 @@
           <div class="card shadow-sm">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">Tabel Section</h5>
+                @if($sections->isEmpty())
                 <a href="{{ route('manage-section.create') }}" class="btn btn-primary">Tambah Section</a>
+                @endif
             </div>
             <div class="card-body">
               <div class="dt-responsive table-responsive">

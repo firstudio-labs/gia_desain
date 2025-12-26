@@ -62,7 +62,9 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="form-label">Gambar</label>
+                      <small class="text-danger">*Disarankan gambar dengan ratio 1:1</small>
                       <input type="file" name="gambar" accept="image/*" class="form-control @error('gambar') is-invalid @enderror">
+                      <small class="text-muted">Format: JPG, JPEG, PNG, GIF, SVG. Maksimal 2MB</small>
                       @error('gambar')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                   </div>

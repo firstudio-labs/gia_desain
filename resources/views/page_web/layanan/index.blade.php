@@ -178,3 +178,20 @@
         </div>
     </section>
 @endsection
+
+@section('style')
+<style>
+    /* Force all images to 1:1 aspect ratio */
+    .service-image img,
+    .service-image {
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .service-image {
+        overflow: hidden;
+    }
+</style>
+@endsection

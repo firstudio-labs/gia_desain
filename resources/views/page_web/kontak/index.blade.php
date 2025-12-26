@@ -27,10 +27,10 @@
     <!-- Contact Info Section Start -->
     <section class="contact-page-wrap section-padding">
         <div class="container">
-            <div class="row g-4">
+            <div class="row g-4 contact-cards-row">
                 @if($profil && $profil->email_perusahaan)
                 <div class="col-lg-4 col-md-6 col-12">
-                    <div class="single-contact-card card1">
+                    <div class="single-contact-card card1 h-100">
                         <div class="top-part">
                             <div class="icon">
                                 <i class="fal fa-envelope"></i>
@@ -42,7 +42,7 @@
                         </div>
                         <div class="bottom-part">                            
                             <div class="info">
-                                <p><a href="mailto:{{ $profil->email_perusahaan }}" class="text-decoration-none text-dark">{{ $profil->email_perusahaan }}</a></p>
+                                <p class="mb-0"><a href="mailto:{{ $profil->email_perusahaan }}" class="text-decoration-none contact-link">{{ $profil->email_perusahaan }}</a></p>
                             </div>
                             <div class="icon">
                                 <i class="fal fa-arrow-right"></i>
@@ -54,7 +54,7 @@
 
                 @if($profil && $profil->no_telp_perusahaan)
                 <div class="col-lg-4 col-md-6 col-12">
-                    <div class="single-contact-card card2">
+                    <div class="single-contact-card card2 h-100">
                         <div class="top-part">
                             <div class="icon">
                                 <i class="fal fa-phone"></i>
@@ -66,7 +66,7 @@
                         </div>
                         <div class="bottom-part">                            
                             <div class="info">
-                                <p><a href="tel:{{ $profil->no_telp_perusahaan }}" class="text-decoration-none text-dark">{{ $profil->no_telp_perusahaan }}</a></p>
+                                <p class="mb-0"><a href="tel:{{ $profil->no_telp_perusahaan }}" class="text-decoration-none contact-link">{{ $profil->no_telp_perusahaan }}</a></p>
                             </div>
                             <div class="icon">
                                 <i class="fal fa-arrow-right"></i>
@@ -78,7 +78,7 @@
 
                 @if($profil && $profil->alamat_perusahaan)
                 <div class="col-lg-4 col-md-6 col-12">
-                    <div class="single-contact-card card3">
+                    <div class="single-contact-card card3 h-100">
                         <div class="top-part">
                             <div class="icon">
                                 <i class="fal fa-map-marker-alt"></i>
@@ -90,7 +90,7 @@
                         </div>
                         <div class="bottom-part">                            
                             <div class="info">
-                                <p>{{ $profil->alamat_perusahaan }}</p>
+                                <p class="mb-0">{{ $profil->alamat_perusahaan }}</p>
                             </div>
                             <div class="icon">
                                 <i class="fal fa-arrow-right"></i>
@@ -188,19 +188,237 @@
     <!-- Map Section Start -->
     @if($profil && $profil->latitude && $profil->longitude)
     <div class="office-google-map-wrapper wow fadeInUp">
-        <div id="map" style="height: 500px; width: 100%;"></div>
+        <div id="map" style="height: 500px; width: 100%; border-radius: 10px; overflow: hidden;"></div>
     </div>
     @elseif($profil && $profil->alamat_perusahaan)
     <div class="office-google-map-wrapper wow fadeInUp">
         <iframe 
             src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dS6fr4Jb-1qFhE&q={{ urlencode($profil->alamat_perusahaan) }}" 
-            style="border:0; width: 100%; height: 500px;" 
+            style="border:0; width: 100%; height: 500px; border-radius: 10px;" 
             allowfullscreen="" 
             loading="lazy">
         </iframe>
     </div>
     @endif
 
+@endsection
+
+@section('style')
+<style>
+    /* ============================================
+       CONTACT CARDS - EQUAL HEIGHT & RESPONSIVE
+       ============================================ */
+    .contact-cards-row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    .contact-cards-row > [class*="col-"] {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .single-contact-card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        min-height: 220px;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        transition: all 0.3s ease;
+    }
+    
+    .single-contact-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    
+    .single-contact-card .top-part {
+        flex: 0 0 auto;
+        margin-bottom: 20px;
+    }
+    
+    .single-contact-card .bottom-part {
+        flex: 1 1 auto;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        margin-top: auto;
+        padding-top: 15px;
+    }
+    
+    .single-contact-card .info {
+        flex: 1;
+        min-width: 0;
+    }
+    
+    .single-contact-card .info p {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        line-height: 1.6;
+        margin: 0;
+    }
+    
+    .single-contact-card .title h4 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 5px;
+        line-height: 1.3;
+    }
+    
+    .single-contact-card .title span {
+        font-size: 0.85rem;
+        color: #666;
+        display: block;
+    }
+    
+    .contact-link {
+        color: #333;
+        transition: color 0.3s ease;
+    }
+    
+    .single-contact-card:hover .contact-link {
+        color: #fff;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 991px) {
+        .single-contact-card {
+            min-height: 200px;
+        }
+        
+        .single-contact-card .top-part {
+            margin-bottom: 15px;
+        }
+        
+        .single-contact-card .title h4 {
+            font-size: 1rem;
+        }
+        
+        .single-contact-card .title span {
+            font-size: 0.8rem;
+        }
+    }
+    
+    @media (max-width: 767px) {
+        .contact-cards-row {
+            gap: 20px;
+        }
+        
+        .contact-cards-row > [class*="col-"] {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+        
+        .single-contact-card {
+            min-height: 180px;
+            padding: 30px 25px;
+        }
+        
+        .single-contact-card .top-part .icon {
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            font-size: 18px;
+            margin-right: 15px;
+        }
+        
+        .single-contact-card .bottom-part .icon {
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 12px;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .single-contact-card {
+            min-height: 170px;
+            padding: 25px 20px;
+        }
+        
+        .single-contact-card .top-part {
+            margin-bottom: 12px;
+        }
+        
+        .single-contact-card .top-part .icon {
+            width: 55px;
+            height: 55px;
+            line-height: 55px;
+            font-size: 16px;
+            margin-right: 12px;
+        }
+        
+        .single-contact-card .title h4 {
+            font-size: 0.95rem;
+        }
+        
+        .single-contact-card .title span {
+            font-size: 0.75rem;
+        }
+        
+        .single-contact-card .info p {
+            font-size: 0.9rem;
+        }
+        
+        .single-contact-card .bottom-part {
+            margin-top: 10px;
+            padding-top: 10px;
+        }
+    }
+    
+    /* Contact Form Responsive */
+    @media (max-width: 767px) {
+        .contact-form-items {
+            padding: 40px 25px !important;
+        }
+        
+        .contact-form-items .title h2 {
+            font-size: 28px;
+        }
+        
+        .contact-form-items .form-clt input,
+        .contact-form-items .form-clt textarea {
+            padding: 14px 20px;
+            font-size: 15px;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .contact-form-items {
+            padding: 30px 20px !important;
+        }
+        
+        .contact-form-items .title h2 {
+            font-size: 24px;
+        }
+        
+        .contact-form-items .title p {
+            font-size: 0.9rem;
+        }
+        
+        .contact-form-items .form-clt input,
+        .contact-form-items .form-clt textarea {
+            padding: 12px 18px;
+            font-size: 14px;
+        }
+    }
+    
+    /* Map Responsive */
+    @media (max-width: 767px) {
+        .office-google-map-wrapper #map,
+        .office-google-map-wrapper iframe {
+            height: 400px !important;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .office-google-map-wrapper #map,
+        .office-google-map-wrapper iframe {
+            height: 350px !important;
+        }
+    }
+</style>
 @endsection
 
 @section('script')

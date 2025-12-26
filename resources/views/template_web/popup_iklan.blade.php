@@ -14,11 +14,11 @@
                         <div class="carousel-inner">
                             @foreach($manageInfos as $index => $info)
                                 <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                                    <div class="popup-iklan-slide" 
-                                         @if($info->gambar)
-                                         style="background-image: url('{{ asset('info/gambar/' . $info->gambar) }}');"
-                                         @endif>
-                                        <div class="popup-iklan-overlay">
+                                    <div class="popup-iklan-slide d-flex align-items-center justify-content-center p-0" style="aspect-ratio: 1 / 1; width: 100%; background: transparent; overflow: hidden;">
+                                        @if($info->gambar)
+                                            <img src="{{ asset('info/gambar/' . $info->gambar) }}" alt="{{ $info->judul }}" class="w-100 h-100" style="object-fit: cover; aspect-ratio: 1 / 1; display: block;">
+                                        @endif
+                                        <div class="popup-iklan-overlay" style="position: absolute; inset: 0;">
                                             <div class="popup-iklan-content-inner">
                                                 <h5 class="popup-iklan-title">{{ $info->judul }}</h5>
                                                 @if($info->deskripsi)

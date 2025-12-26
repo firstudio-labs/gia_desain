@@ -41,6 +41,17 @@
               <h5>Form Tambah Produk</h5>
             </div>
             <div class="card-body">
+              @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <strong>Terjadi kesalahan!</strong> Silakan periksa form di bawah ini.
+                  <ul class="mb-0 mt-2">
+                    @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                    @endforeach
+                  </ul>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              @endif
               <form action="{{ route('manage-produk.store') }}" method="POST" enctype="multipart/form-data" id="produkForm">
                 @csrf
                 <div class="row">
@@ -146,6 +157,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="form-label">Gambar Produk</label>
+                      <small class="text-danger">*Disarankan gambar dengan ratio 1:1</small>
                       <div class="d-flex justify-content-between align-items-center mb-3">
                         <span class="text-muted">Tambah beberapa gambar produk</span>
                         <button type="button" class="btn btn-sm btn-success" id="addImageRow"><i class="bx bx-plus"></i> Tambah Gambar</button>
@@ -188,8 +200,18 @@
       .catch(() => { subSelect.innerHTML = '<option value="">-- Pilih Sub Kategori --</option>'; });
   }
 
-  document.getElementById('kategoriSelect').addEventListener('change', function(){
+  const kategoriSelect = document.getElementById('kategoriSelect');
+  kategoriSelect.addEventListener('change', function(){
     if (this.value) fetchSubKategori(this.value);
+  });
+
+  // Load sub kategori saat halaman dimuat jika ada old value (untuk mempertahankan input saat error)
+  document.addEventListener('DOMContentLoaded', function(){
+    const oldKategoriId = @json(old('kategori_id'));
+    const oldSubKategoriId = @json(old('sub_kategori_id'));
+    if (oldKategoriId) {
+      fetchSubKategori(oldKategoriId, oldSubKategoriId);
+    }
   });
 
   // Dynamic images inputs

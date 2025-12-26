@@ -47,7 +47,11 @@
                   <div class="col-md-8">
                     <div class="form-group">
                       <label class="form-label">Nama Section <span class="text-danger">*</span></label>
-                      <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required>
+                      <select name="name" class="form-control @error('name') is-invalid @enderror" required>
+                        <option value="">-- Pilih Nama Section --</option>
+                        <option value="Homepage" {{ old('name') == 'Homepage' ? 'selected' : '' }}>Homepage</option>
+                      
+                      </select>
                       @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                   </div>

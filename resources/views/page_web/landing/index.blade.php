@@ -671,6 +671,76 @@
     .product-card-link:hover .content h3 {
         color: var(--theme, #007bff);
     }
+
+    /* ============================================
+       FORCE ALL IMAGES TO 1:1 ASPECT RATIO
+       ============================================ */
+    .hero-image img,
+    .shop-catagories-item img,
+    .shop-items img,
+    .service-image img,
+    .about-new-items img,
+    .thumb-image-1 img {
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Popup iklan slide - force 1:1 */
+    #popupIklan .popup-iklan-slide {
+        aspect-ratio: 1 / 1;
+        height: auto !important;
+    }
+
+    /* Hero images */
+    .hero-3 .hero-image {
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+    }
+
+    .hero-3 .hero-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* About section images */
+    .about-new-items .thumb-image-1,
+    .about-new-items .thumb-image-1 img {
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+
+    .about-new-items .thumb-image-1 {
+        overflow: hidden;
+    }
+
+    /* Service images */
+    .service-image {
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+    }
+
+    .service-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Products box items */
+    .products-box-items .product-thumb {
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+    }
+
+    .products-box-items .product-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 </style>
 @endsection
 

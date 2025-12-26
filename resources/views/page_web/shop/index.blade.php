@@ -230,3 +230,20 @@
         </div>
     </section>
 @endsection
+
+@section('style')
+<style>
+    /* Force all shop images to 1:1 aspect ratio */
+    .shop-image img,
+    .shop-image {
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .shop-image {
+        overflow: hidden;
+    }
+</style>
+@endsection

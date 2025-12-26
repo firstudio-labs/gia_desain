@@ -41,6 +41,17 @@
               <h5>Form Edit Produk</h5>
             </div>
             <div class="card-body">
+              @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <strong>Terjadi kesalahan!</strong> Silakan periksa form di bawah ini.
+                  <ul class="mb-0 mt-2">
+                    @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                    @endforeach
+                  </ul>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              @endif
               <form action="{{ route('manage-produk.update', $manageProduk->id) }}" method="POST" enctype="multipart/form-data" id="produkForm">
                 @csrf
                 @method('PUT')
@@ -150,6 +161,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="form-label">Gambar Produk</label>
+                      <small class="text-danger">*Disarankan gambar dengan ratio 1:1</small>
                       @php $existing = is_array($manageProduk->gambar_produk) ? $manageProduk->gambar_produk : []; @endphp
                       @if(count($existing))
                         <div class="row g-3 mb-3">
@@ -204,7 +216,25 @@
   }
 
   const kategoriSelect = document.getElementById('kategoriSelect');
-  kategoriSelect.addEventListener('change', function(){ if (this.value) fetchSubKategori(this.value); });
+  kategoriSelect.addEventListener('change', function(){ 
+    if (this.value) {
+      // Jika ada old value untuk sub_kategori_id, gunakan itu, jika tidak gunakan nilai dari database
+      const oldSubKategoriId = @json(old('sub_kategori_id', $manageProduk->sub_kategori_id));
+      fetchSubKategori(this.value, oldSubKategoriId);
+    }
+  });
+
+  // Load sub kategori saat halaman dimuat jika kategori berubah (untuk mempertahankan input saat error)
+  document.addEventListener('DOMContentLoaded', function(){
+    const currentKategoriId = kategoriSelect.value;
+    const oldKategoriId = @json(old('kategori_id'));
+    const oldSubKategoriId = @json(old('sub_kategori_id', $manageProduk->sub_kategori_id));
+    
+    // Jika kategori berubah dari old value, refresh sub kategori
+    if (oldKategoriId && oldKategoriId !== currentKategoriId && currentKategoriId) {
+      fetchSubKategori(currentKategoriId, oldSubKategoriId);
+    }
+  });
 
   // Dynamic images inputs
   let imgIdx = 0;
