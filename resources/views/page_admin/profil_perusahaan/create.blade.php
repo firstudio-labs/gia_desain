@@ -99,8 +99,8 @@
                       @enderror
                     </div>
                     <div class="form-group">
-                      <label class="form-label">LinkedIn</label>
-                      <input type="text" name="linkedin_perusahaan" class="form-control @error('linkedin_perusahaan') is-invalid @enderror" value="{{ old('linkedin_perusahaan') }}" placeholder="Masukkan username LinkedIn">
+                      <label class="form-label">Tiktok</label>
+                      <input type="text" name="linkedin_perusahaan" class="form-control @error('linkedin_perusahaan') is-invalid @enderror" value="{{ old('linkedin_perusahaan') }}" placeholder="Masukkan username Tiktok">
                       @error('linkedin_perusahaan')
                         <div class="invalid-feedback">{{ $message }}</div>
                       @enderror

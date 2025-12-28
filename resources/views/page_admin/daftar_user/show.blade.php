@@ -120,9 +120,9 @@
                         </strong>
                       </div>
                       @endif
-                    </div>
                   </div>
                 </div>
+              </div>
 
                 <!-- Statistik Pesanan -->
                 <div class="col-md-6 mb-4">

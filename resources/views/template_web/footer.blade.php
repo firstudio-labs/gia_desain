@@ -32,7 +32,7 @@
                                     <a href="{{ $profil->instagram_perusahaan }}" target="_blank"><i class="fab fa-instagram"></i></a>
                                 @endif
                                 @if($profil && $profil->linkedin_perusahaan)
-                                    <a href="{{ $profil->linkedin_perusahaan }}" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="{{ $profil->linkedin_perusahaan }}" target="_blank"><i class="fab fa-tiktok"></i></a>
                                 @endif
                             </div>
                         </div>
