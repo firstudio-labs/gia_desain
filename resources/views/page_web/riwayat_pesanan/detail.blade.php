@@ -155,7 +155,7 @@
                                             </button>
                                         @endif
 
-                                        @if($pesanan->status == 'proses')
+                                        {{-- @if($pesanan->status == 'proses')
                                             <form action="{{ route('riwayat-pesanan.update-status', $pesanan->id) }}" method="POST" class="mb-2">
                                                 @csrf
                                                 @method('PUT')
@@ -163,7 +163,7 @@
                                                     <i class="far fa-check-circle me-2"></i>Ubah Status ke Selesai
                                                 </button>
                                             </form>
-                                        @endif
+                                        @endif --}}
 
                                         @if (session('success'))
                                             <div class="alert alert-success alert-dismissible fade show" role="alert">

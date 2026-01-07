@@ -40,6 +40,21 @@
     <!--<< Style.css >>-->
     <link rel="stylesheet" href="{{ asset('web') }}/assets/css/style.css">
     @yield('style')
+    <style>
+         /* ============================================
+       MOBILE OFFCANVAS & SIDEBAR Z-INDEX
+       ============================================ */
+    @media (max-width: 991px) {
+        .offcanvas__info,
+        .side_bar {
+            z-index: 10001 !important;
+        }
+
+        .offcanvas__overlay {
+            z-index: 10000 !important;
+        }
+    }
+    </style>
 </head>
 
 <body>
@@ -112,15 +127,11 @@
 
     <!-- Offcanvas Area Start -->
     <div class="fix-area">
-        <div class="offcanvas__info">
+        <div class="offcanvas__info" >
             <div class="offcanvas__wrapper">
                 <div class="offcanvas__content">
                     <div class="offcanvas__top mb-5 d-flex justify-content-between align-items-center">
-                        <div class="offcanvas__logo">
-                            <a href="index.html">
-                                <img src="{{ asset('web') }}/assets/img/logo/logo.svg" alt="logo-img">
-                            </a>
-                        </div>
+                     
                         <div class="offcanvas__close">
                             <button>
                                 <i class="fas fa-times"></i>
@@ -128,35 +139,7 @@
                         </div>
                     </div>
                   
-                    <!-- Mobile Search Form -->
-                    <div class="mobile-search-form">
-                        <h5 class="mobile-search-title">Cari Produk</h5>
-                        <form action="{{ route('shop') }}" method="GET">
-                            <div class="mb-3">
-                                <input type="text" 
-                                       name="search" 
-                                       class="form-control" 
-                                       placeholder="Cari produk..." 
-                                       value="{{ request('search') }}">
-                            </div>
-                            <div class="mb-3">
-                                <select name="kategori" class="form-select mobile-kategori-select">
-                                    <option value="">Semua Kategori</option>
-                                    @php
-                                        $kategoris = \App\Models\ManageKategori::orderBy('nama_kategori')->get();
-                                    @endphp
-                                    @foreach($kategoris as $kategori)
-                                        <option value="{{ $kategori->id }}" {{ request('kategori') == $kategori->id ? 'selected' : '' }}>
-                                            {{ $kategori->nama_kategori }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">
-                                <i class="fas fa-search me-2"></i>Cari Produk
-                            </button>
-                        </form>
-                    </div>
+                   
                   
                     <div class="mobile-menu fix mb-3"></div>
                  

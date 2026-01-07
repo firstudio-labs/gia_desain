@@ -58,7 +58,7 @@
                     </div>
                     <div class="mean__menu-wrapper flex-shrink-0">
                         <div class="main-menu">
-                            <nav id="mobile-menu">
+                            <nav id="mobile-menu" style="z-index: 9999;">
                                 <ul>
                                     <li class="has-dropdown active menu-thumb">
                                         <a href="{{ route('landing') }}">
@@ -127,6 +127,7 @@
                                         <i class="fas fa-chevron-down accordion-arrow"></i>
                                     </button>
                                 </h2>
+                                
                                 <div id="collapseMobileSearch" class="accordion-collapse collapse"
                                     aria-labelledby="headingMobileSearch" data-bs-parent="#mobileSearchAccordion">
                                     <div class="accordion-body">
@@ -1158,4 +1159,18 @@
     /* ============================================
        MOBILE MENU BUTTON
        ============================================ */
+
+    /* ============================================
+       MOBILE OFFCANVAS & SIDEBAR Z-INDEX
+       ============================================ */
+    @media (max-width: 991px) {
+        .offcanvas__info,
+        .side_bar {
+            z-index: 10001 !important;
+        }
+
+        .offcanvas__overlay {
+            z-index: 10000 !important;
+        }
+    }
 </style>
